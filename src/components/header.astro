@@ -1,8 +1,9 @@
 ---
+const phoneNumber = "509-461-5951";
 ---
-
-<header class="w-full bg-gradient-to-r from-black via-[#150000] to-red-900 text-white px-10 py-4 flex items-center justify-between relative">
-  <nav class="flex items-center space-x-6 text-sm font-semibold">
+<header class="w-full absolute top-0 left-0 z-50 px-6 sm:px-10 py-4 flex items-center justify-between">
+  <!-- 🧭 Menú escritorio -->
+  <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
     <a href="#" class="hover:text-red-400 transition">Hogar</a>
     <a href="#" class="hover:text-red-400 transition">Alquilar un coche</a>
     <a href="#" class="hover:text-red-400 transition">Buscar coche</a>
@@ -19,21 +20,61 @@
     </div>
   </nav>
 
- <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[35%]">
-  <img src="public/carros.png" alt="logo" class="w-34 h-54 object-contain" />    
-</div>
+  <!-- 🚘 Logo centrado -->
+  <div class="absolute left-1/2 top-[70%] transform -translate-x-1/2 -translate-y-1/2">
+    <img 
+      src="public/HW-Logo.webp" 
+      alt="logo" 
+      class="h-20 sm:h-24 md:h-28 lg:h-32 object-contain"
+    />
+  </div>
 
-
-  <div class="flex items-center space-x-6 text-sm font-semibold">
+  <!-- 📞 Contacto y botón (solo escritorio) -->
+  <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
     <div class="flex items-center space-x-2">
-      <span class="text-red-500">📞</span>
-      <span>509-461-5951</span>
+      <span class="text-red-500 text-lg">📞</span>
+      <span>{phoneNumber}</span>
     </div>
-    <a
-      href="#"
-      class="border border-white px-5 py-2 rounded hover:bg-red-700 hover:border-red-700 transition"
-    >
-      RESERVAR AHORA
+    <a href="#" class="btn btn-outline boton-diagonal">
+      <span>RESERVAR AHORA</span>
     </a>
   </div>
+
+  <!-- 🍔 Botón hamburguesa (solo móvil) -->
+  <button id="menu-toggle" class="md:hidden text-3xl text-white focus:outline-none z-[60]">
+    ☰
+  </button>
+
+  <!-- 📱 Menú móvil lateral -->
+  <div
+    id="mobile-menu"
+    class="fixed top-0 left-0 w-64 h-full bg-black text-white transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl z-[59] p-8"
+  >
+    <button
+      id="menu-close"
+      class="absolute top-4 right-4 text-gray-400 text-2xl hover:text-red-500"
+    >
+      ✕
+    </button>
+    <nav class="mt-12 space-y-4">
+      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Hogar</a>
+      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Alquilar un coche</a>
+      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Buscar coche</a>
+      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Conductores ejecutivos</a>
+      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Contacto</a>
+    </nav>
+  </div>
+
+  <!-- ⚙️ Script funcional -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const close = document.getElementById("menu-close");
+
+      toggle.addEventListener("click", () => menu.classList.remove("-translate-x-full"));
+      close.addEventListener("click", () => menu.classList.add("-translate-x-full"));
+    });
+  </script>
 </header>
+
