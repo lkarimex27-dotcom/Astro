@@ -1,80 +1,176 @@
----
-const phoneNumber = "509-461-5951";
----
-<header class="w-full absolute top-0 left-0 z-50 px-6 sm:px-10 py-4 flex items-center justify-between">
-  <!-- 🧭 Menú escritorio -->
-  <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
-    <a href="#" class="hover:text-red-400 transition">Hogar</a>
-    <a href="#" class="hover:text-red-400 transition">Alquilar un coche</a>
-    <a href="#" class="hover:text-red-400 transition">Buscar coche</a>
-    <a href="#" class="hover:text-red-400 transition">Conductores ejecutivos</a>
-
-    <div class="relative group">
-      <button class="hover:text-red-400 transition flex items-center gap-1">
-        Contacto <span>▼</span>
+<header class="bg-gray-900">
+  <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        command="show-modal"
+        commandfor="mobile-menu"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          data-slot="icon"
+          aria-hidden="true"
+          class="size-6"
+        >
+          <path
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
       </button>
-      <div class="absolute hidden group-hover:block bg-black border border-red-700 rounded p-2 mt-2 z-20">
-        <a href="#" class="block hover:text-red-400 text-sm">Correo electrónico</a>
-        <a href="#" class="block hover:text-red-400 text-sm">WhatsApp</a>
-      </div>
+    </div>
+    <el-popover-group class="hidden lg:flex lg:gap-x-12">
+      <a href="#" class="text-sm/6 font-semibold text-white">Features</a>
+      <a href="#" class="text-sm/6 font-semibold text-white">Marketplace</a>
+      <a href="#" class="text-sm/6 font-semibold text-white">Company</a>
+    </el-popover-group>
+
+    <div class="flex lg:flex-1 justify-center">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">HectorsWhips</span>
+        <img src="../../public/HW-Logo.webp" alt="" class="h-8 w-auto" />
+      </a>
+    </div>
+
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-8">
+      <a href="#" class="text-sm/6 font-semibold text-white"
+        >Log in2<span aria-hidden="true">&rarr;</span></a
+      ><a href="#" class="text-sm/6 font-semibold text-white"
+        >Log in1 <span aria-hidden="true">&rarr;</span></a
+      >
     </div>
   </nav>
-
-  <!-- 🚘 Logo centrado -->
-  <div class="absolute left-1/2 top-[70%] transform -translate-x-1/2 -translate-y-1/2">
-    <img 
-      src="public/HW-Logo.webp" 
-      alt="logo" 
-      class="h-20 sm:h-24 md:h-28 lg:h-32 object-contain"
-    />
-  </div>
-
-  <!-- 📞 Contacto y botón (solo escritorio) -->
-  <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
-    <div class="flex items-center space-x-2">
-      <span class="text-red-500 text-lg">📞</span>
-      <span>{phoneNumber}</span>
-    </div>
-    <a href="#" class="btn btn-outline boton-diagonal">
-      <span>RESERVAR AHORA</span>
-    </a>
-  </div>
-
-  <!-- 🍔 Botón hamburguesa (solo móvil) -->
-  <button id="menu-toggle" class="md:hidden text-3xl text-white focus:outline-none z-[60]">
-    ☰
-  </button>
-
-  <!-- 📱 Menú móvil lateral -->
-  <div
-    id="mobile-menu"
-    class="fixed top-0 left-0 w-64 h-full bg-black text-white transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl z-[59] p-8"
-  >
-    <button
-      id="menu-close"
-      class="absolute top-4 right-4 text-gray-400 text-2xl hover:text-red-500"
-    >
-      ✕
-    </button>
-    <nav class="mt-12 space-y-4">
-      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Hogar</a>
-      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Alquilar un coche</a>
-      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Buscar coche</a>
-      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Conductores ejecutivos</a>
-      <a href="#" class="block text-lg border-b border-gray-700 pb-2 hover:text-red-400 font-semibold">Contacto</a>
-    </nav>
-  </div>
-
-  <!-- ⚙️ Script funcional -->
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const toggle = document.getElementById("menu-toggle");
-      const menu = document.getElementById("mobile-menu");
-      const close = document.getElementById("menu-close");
-
-      toggle.addEventListener("click", () => menu.classList.remove("-translate-x-full"));
-      close.addEventListener("click", () => menu.classList.add("-translate-x-full"));
-    });
-  </script>
+  <el-dialog>
+    <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
+      <div tabindex="0" class="fixed inset-0 focus:outline-none">
+        <el-dialog-panel
+          class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10"
+        >
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Your Company</span>
+              <img
+                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                alt=""
+                class="h-8 w-auto"
+              />
+            </a>
+            <button type="button" command="close"commandfor="mobile-menu" class="-m-2.5 rounded-md p-2.5 text-gray-400">
+              <span class="sr-only">Close menu</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                data-slot="icon"
+                aria-hidden="true"
+                class="size-6"
+              >
+                <path
+                  d="M6 18 18 6M6 6l12 12"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-white/10">
+              <div class="space-y-2 py-6">
+                <div class="-mx-3">
+                  <button
+                    type="button"
+                    command="--toggle"
+                    commandfor="products"
+                    class="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >
+                    Product
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      data-slot="icon"
+                      aria-hidden="true"
+                      class="size-5 flex-none in-aria-expanded:rotate-180"
+                    >
+                      <path
+                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd"
+                        fill-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                  <el-disclosure
+                    id="products"
+                    hidden
+                    class="mt-2 block space-y-2"
+                  >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Analytics</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Engagement</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Security</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Integrations</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Automations</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Watch demo</a
+                    >
+                    <a
+                      href="#"
+                      class="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-white hover:bg-white/5"
+                      >Contact sales</a
+                    >
+                  </el-disclosure>
+                </div>
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >Features</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >Marketplace</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >Company</a
+                >
+              </div>
+              <div class="py-6">
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >Log in</a
+                >
+              </div>
+            </div>
+          </div>
+        </el-dialog-panel>
+      </div>
+    </dialog>
+  </el-dialog>
 </header>
-
