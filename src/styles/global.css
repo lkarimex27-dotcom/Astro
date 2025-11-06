@@ -13,3 +13,7 @@
 @layer components {
  
 }
+
+@theme {
+  --font-display: "Epilogue", sans-serif; 
+}
